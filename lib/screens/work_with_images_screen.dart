@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practice_app/layouts/buttons_screen_layout.dart';
-import 'package:practice_app/screens/carousel_screen.dart';
+import 'package:practice_app/screens/carousel_screen/carousel_screen.dart';
 import 'package:practice_app/screens/image_picker_screen.dart';
 import 'package:practice_app/utils/pop_utils.dart';
 import 'package:practice_app/widgets/drawer.dart';

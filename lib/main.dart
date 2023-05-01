@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:practice_app/get_it/get_it.dart';
 import 'package:practice_app/providers/accelerometer_provider.dart';
 import 'package:practice_app/providers/gyroscope_provider.dart';
 import 'package:practice_app/providers/magnetometer_provider.dart';
 import 'package:practice_app/providers/userAccelerometer_provider.dart';
+import 'package:practice_app/providers/user_info_provider.dart';
 import 'package:practice_app/screens/api_requests_screen/api_requests_screen.dart';
-import 'package:practice_app/screens/carousel_screen.dart';
+import 'package:practice_app/screens/calculator_screen/calculator_screen.dart';
+import 'package:practice_app/screens/carousel_screen/carousel_screen.dart';
+import 'package:practice_app/screens/chart_screen/chart_screen.dart';
 import 'package:practice_app/screens/geolocation.dart';
 import 'package:practice_app/screens/home_screen.dart';
 import 'package:practice_app/screens/image_picker_screen.dart';
@@ -14,7 +18,8 @@ import 'package:practice_app/screens/sensors_plus_screen.dart';
 import 'package:practice_app/screens/shimmer_loading_screen.dart';
 import 'package:practice_app/screens/monobank_ui/ui_monobank_list_screen.dart';
 import 'package:practice_app/screens/url_launcher_screen.dart';
-import 'package:practice_app/screens/videos_screen.dart';
+import 'package:practice_app/screens/device_info_screen/device_info_screen.dart';
+import 'package:practice_app/screens/video_screen/video_screen.dart';
 import 'package:practice_app/screens/work_with_images_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -22,9 +27,9 @@ import 'screens/change_info_screen/change_info_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setupGetIt();
 
   await Hive.initFlutter();
-  
   runApp(MyApp());
 }
 
@@ -50,10 +55,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => AccelerometerProvider()),
-        ChangeNotifierProvider(create: (context) => UserAccelerometerProvider()),
-        ChangeNotifierProvider(create: (context) => GyroscopeProvider()),
-        ChangeNotifierProvider(create: (context) => MagnetometerProvider()),
+        ChangeNotifierProvider(
+          create: (context) => AccelerometerProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UserAccelerometerProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => GyroscopeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => MagnetometerProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UserInfoProvider()..init(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -68,14 +84,19 @@ class MyApp extends StatelessWidget {
           GeolocationScreen.routeName: (context) => const GeolocationScreen(),
           WorkWithImages.routeName: (context) => const WorkWithImages(),
           CarouselScreen.routeName: (context) => const CarouselScreen(),
-          VideosScreen.routeName: (context) => const VideosScreen(),
-          ShimmerLoadingScreen.routeName: (context) => const ShimmerLoadingScreen(),
+          DeviceInfoScreen.routeName: (context) => DeviceInfoScreen(),
+          ShimmerLoadingScreen.routeName: (context) =>
+              const ShimmerLoadingScreen(),
           SensorsPlusScreen.routeName: (context) => const SensorsPlusScreen(),
-          UiMonobankListScreen.routeName:(context) => const UiMonobankListScreen(),
+          UiMonobankListScreen.routeName: (context) =>
+              const UiMonobankListScreen(),
           // MyAppBar.routeName:(context) => const MyAppBar(),
-          OptionsScreen.routeName:(context) => OptionsScreen(),
-          ApiRequestsScreen.routeName:(context) => ApiRequestsScreen(),
-          ChangeInfoScreen.routeName:(context) => ChangeInfoScreen(),
+          OptionsScreen.routeName: (context) => OptionsScreen(),
+          ApiRequestsScreen.routeName: (context) => ApiRequestsScreen(),
+          ChangeInfoScreen.routeName: (context) => ChangeInfoScreen(),
+          CalculatorScreen.routeName: (context) => CalculatorScreen(),
+          ChartScreen.routeName:(context) => ChartScreen(),
+          VideoScreen.routeName: (context) => VideoScreen(),
         },
       ),
     );

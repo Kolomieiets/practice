@@ -1,10 +1,9 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/objects/items_for_shimmer_loading.dart';
 import 'package:practice_app/utils/pop_utils.dart';
 import 'package:practice_app/widgets/drawer.dart';
-// import 'package:skeletons/skeletons.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:skeletons/skeletons.dart';
+// import 'package:shimmer/shimmer.dart';
 
 class ShimmerLoadingScreen extends StatefulWidget {
   static const String routeName = '/shimmer';
@@ -15,7 +14,7 @@ class ShimmerLoadingScreen extends StatefulWidget {
 }
 
 class _ShimmerLoadingScreenState extends State<ShimmerLoadingScreen> {
-  final List<LoadingItems> _itemList = [
+  List<LoadingItems> _itemList = [
     LoadingItems(
       url: 'https://picsum.photos/seed/picsum/200/300',
       title: 'Static Random Image',
@@ -64,58 +63,62 @@ class _ShimmerLoadingScreenState extends State<ShimmerLoadingScreen> {
           drawer: const MyDrawer(),
           body: SizedBox(
             height: MediaQuery.of(context).size.height,
-            child: ListView.builder(
-                itemCount: _itemList.length,
-                itemBuilder: (context, index) {
-                  return _isLoading ? _setShimmer() : _setItemList(index);
-                  // return
-                  // _isLoading ?
-                  // _setSkeleton(index);
-                  //  : _setItemList(index);
-                }),
+            child: RefreshIndicator(
+              onRefresh: pullRefresh,
+              child: ListView.builder(
+                  itemCount: _itemList.length,
+                  itemBuilder: (context, index) {
+                    return _isLoading
+                        ? _setSkeleton(index)
+                        : _setItemList(index);
+                  }),
+            ),
           )),
     );
   }
 
-  // Widget _setSkeleton(int i) {
-  //   return Skeleton(
-  //       isLoading: _isLoading,
-  //       skeleton: SkeletonListTile(
-  //         leadingStyle: const SkeletonAvatarStyle(
-  //           shape: BoxShape.circle,
-  //         ),
-  //         titleStyle: const SkeletonLineStyle(height: 16, width: 100),
-  //         hasSubtitle: true,
-  //         subtitleStyle: SkeletonLineStyle(
-  //             height: 16, width: MediaQuery.of(context).size.width - 100),
-  //       ),
-  //       child: _setItemList(i));
-  // }
+  Future<void> pullRefresh() async {
+    _itemList = _itemList.reversed.toList();
+    setState(() {});
+  }
+
+  Widget _setSkeleton(int i) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Skeleton(
+          isLoading: _isLoading,
+          skeleton: SkeletonListTile(
+            leadingStyle: const SkeletonAvatarStyle(),
+            titleStyle: const SkeletonLineStyle(height: 16, width: 100),
+            hasSubtitle: true,
+            subtitleStyle: SkeletonLineStyle(
+                height: 16, width: MediaQuery.of(context).size.width - 100),
+          ),
+          child: _setItemList(i)),
+    );
+  }
 
   Widget _setItemList(int ind) {
     return ListTile(
-      leading: DottedBorder(
-        dashPattern: const [2, 2],
-        padding: const EdgeInsets.all(1),
-        borderType: BorderType.RRect,
-        radius: const Radius.circular(5),
-        color: Colors.black,
-        strokeWidth: 1,
-        child: Container(
-          clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: Image.network(
-            _itemList[ind].url,
-            loadingBuilder: ((context, child, loadingProgress) {
-              if (loadingProgress == null) return child;
-              return const CircularProgressIndicator();
-            }),
-            height: 50,
-            width: 50,
-            fit: BoxFit.cover,
-          ),
+      leading: Container(
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Image.network(
+          _itemList[ind].url,
+          errorBuilder: (context, error, stackTrace) => Image.asset('assets/images/placeholder.png'),
+          loadingBuilder: ((context, child, loadingProgress) {
+            return Stack(
+              children: [
+                child,
+                if (loadingProgress != null) const CircularProgressIndicator(),
+              ],
+            );
+          }),
+          height: 50,
+          width: 50,
+          fit: BoxFit.cover,
         ),
       ),
       title: Text(_itemList[ind].title),
@@ -126,51 +129,4 @@ class _ShimmerLoadingScreenState extends State<ShimmerLoadingScreen> {
     );
   }
 
-  Widget _setShimmer() {
-    return Shimmer.fromColors(
-        baseColor: Colors.grey[300]!,
-        highlightColor: Colors.grey[100]!,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40),
-                  color: Colors.white,
-                ),
-                height: 50,
-                width: 50,
-              ),
-              const SizedBox(
-                width: 16.0,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4.0),
-                      color: Colors.white,
-                    ),
-                    height: 15,
-                    width: 150,
-                  ),
-                  const SizedBox(
-                    height: 8.0,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4.0),
-                      color: Colors.white,
-                    ),
-                    height: 15,
-                    width: MediaQuery.of(context).size.width - 100,
-                  ),
-                ],
-              )
-            ],
-          ),
-        ));
-  }
 }

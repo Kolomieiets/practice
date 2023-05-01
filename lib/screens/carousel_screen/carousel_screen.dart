@@ -1,9 +1,8 @@
-import 'dart:io';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:practice_app/screens/carousel_screen/components/buildImage.dart';
+import 'package:practice_app/screens/carousel_screen/components/dots_indicator.dart';
 
 class CarouselScreen extends StatefulWidget {
   static const String routeName = '/carousel';
@@ -38,7 +37,7 @@ class _CarouselScreenState extends State<CarouselScreen> {
                     itemCount: _images!.length,
                     itemBuilder: (context, index, realIndex) {
                       final img = _images![index];
-                      return _buildImage(img);
+                      return BuildImage(img);
                     },
                     options: CarouselOptions(
                       height: 400,
@@ -52,43 +51,13 @@ class _CarouselScreenState extends State<CarouselScreen> {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  _dotsIndicator(),
+                  DotsIndicator(activeIndex: _activeIndex, images: _images,),
                 ],
               ),
       ),
     );
   }
 
-  Widget _dotsIndicator() {
-    return AnimatedSmoothIndicator(
-      activeIndex: _activeIndex,
-      count: _images!.length,
-      effect: const JumpingDotEffect(activeDotColor: Colors.black, dotHeight: 12.0, dotWidth: 12.0, verticalOffset: 8.0),
-
-    );
-  }
-
-  Widget _buildImage(XFile image) {
-    File img = File(image.path);
-    return Container(
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.7),
-            spreadRadius: 2,
-            blurRadius: 4,
-            
-          ),
-        ],
-      ),
-      child: Image.file(
-        img,
-        fit: BoxFit.fill,
-      ),
-    );
-  }
 
   Future<void> _pickMultiImages() async {
     final images = await ImagePicker().pickMultiImage();

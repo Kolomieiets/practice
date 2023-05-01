@@ -48,6 +48,22 @@ dependencies:
   http: ^0.13.5
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  path_provider: ^2.0.13
+  share_plus: ^6.3.1
+  pull_to_refresh: ^2.0.0
+  connectivity_plus: ^3.0.3
+  device_info_plus: ^8.1.0
+  google_fonts: ^4.0.3
+  battery_plus: ^3.0.3
+  flutter_local_notifications: ^13.0.0
+  get_it: ^7.2.0
+  dio: ^5.1.1
+  flutter_rating_bar: ^4.0.1
+  fl_chart: ^0.61.0
+  video_player: ^2.6.1
+  chewie: ^1.4.0
+  google_maps_flutter: ^2.2.5
+  cached_network_image: ^3.2.3
   
 
   # The following adds the Cupertino Icons font to your application.
@@ -86,6 +102,7 @@ flutter:
   assets:
     - assets/images/avatar.png
     - assets/icons/star.gif
+    - assets/images/placeholder.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

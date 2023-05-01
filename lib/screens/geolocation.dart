@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:practice_app/screens/api_requests_screen/components/popup_content.dart';
+import 'package:practice_app/screens/api_requests_screen/components/popup_layout.dart';
 import 'package:practice_app/utils/pop_utils.dart';
 import 'package:practice_app/widgets/drawer.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class GeolocationScreen extends StatefulWidget {
   static const String routeName = '/geolocation';
@@ -19,6 +21,12 @@ class _GeolocationScreenState extends State<GeolocationScreen> {
   bool _isLoading = false;
 
   @override
+  void initState() {
+    _getLocation();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
@@ -28,57 +36,91 @@ class _GeolocationScreenState extends State<GeolocationScreen> {
         appBar: AppBar(title: const Text('Your geolocation')),
         drawer: const MyDrawer(),
         body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            const Icon(
-              Icons.location_on,
-              size: 50.0,
-              color: Colors.red,
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
-            const Text(
-              'Get user Location',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.location_on,
+                size: 50.0,
+                color: Colors.red,
               ),
-            ),
-            const SizedBox(height: 8.0),
-            _setLocationData(),
-            const SizedBox(height: 8.0),
-            ElevatedButton(
-              onPressed: () {
-                _getLocation();
-              },
-              child: const Text('Get current Location'),
-            ),
-            ElevatedButton(
-                onPressed: () async {
-                  _getLocation();
-                  final Uri url = Uri(
-                    scheme: 'https',
-                    path: 'google.pl/maps/@$_lat,$_long,21z',
-                  );
-                  await launchUrl(
-                    url,
+              const SizedBox(
+                height: 16.0,
+              ),
+              const Text(
+                'Get user Location',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return showPopUp();
+                    },
                   );
                 },
-                child: const Text('Open with Google Map'))
-          ]),
+                child: const Text('Get current Location'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return showMap();
+                    },
+                  );
+                },
+                child: const Text('Show on map'),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _setLocationData() {
-    if (_locationMessage.isEmpty && !_isLoading){
-      return const SizedBox(height: 8.0);
-      }
+  Widget showMap() {
+    return PopUpLayout(
+      child: PopUpContent(
+        buttonText: 'Ok',
+        title: 'Your current location!',
+        sharingText: 'My location! $_locationMessage',
+        child: SizedBox(
+          height: 200,
+          child: GoogleMap(
+            markers: {Marker(markerId: MarkerId('origin'), position: LatLng(
+                double.parse(_lat),
+                double.parse(_long),
+              ),)},
+            myLocationButtonEnabled: false,
+            zoomControlsEnabled: false,
+            initialCameraPosition: CameraPosition(
+              target: LatLng(
+                double.parse(_lat),
+                double.parse(_long),
+              ),
+              zoom: 15,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
-    if (_isLoading) return const CircularProgressIndicator();
-
-    return Text(_locationMessage);
+  Widget showPopUp() {
+    return PopUpLayout(
+      child: PopUpContent(
+        buttonText: 'Ok',
+        title: 'Your current location!',
+        sharingText: 'My location! $_locationMessage',
+        child: Text(_locationMessage),
+      ),
+    );
   }
 
   Future<void> _getLocation() async {

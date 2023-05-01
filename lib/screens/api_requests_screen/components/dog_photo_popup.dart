@@ -1,66 +1,43 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:practice_app/screens/api_requests_screen/components/popup_content.dart';
+import 'package:practice_app/screens/api_requests_screen/components/popup_layout.dart';
 
-class DogPhotoPopUp extends StatefulWidget {
-  const DogPhotoPopUp({super.key});
+class DogPhotoPopUp extends StatelessWidget {
+  DogPhotoPopUp({super.key});
 
-  @override
-  State<DogPhotoPopUp> createState() => _DogPhotoPopUpState();
-}
-
-class _DogPhotoPopUpState extends State<DogPhotoPopUp> {
   String link = '';
   String newUrl = '';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Center(
-          child: FutureBuilder(
-            future: _getDogPhoto(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return Container(
-                  color: Colors.white,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            icon: Icon(Icons.clear),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: 32.0, top: 8.0, right: 32.0, left: 32.0),
-                        child: Image.network(newUrl),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text('Good boy'),
-                      ),
-                      SizedBox(height: 16.0),
-                    ],
-                  ),
-                );
-              } else {
-                return CircularProgressIndicator(color: Colors.white);
-              }
-            },
-          ),
-        ),
+    return PopUpLayout(
+      child: FutureBuilder(
+        future: _getDogPhoto(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return PopUpContent(
+              child: CachedNetworkImage(
+                imageUrl: newUrl,
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Column(
+                  children: [
+                    Icon(Icons.error, size: 60, color: Colors.grey,),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Oops, something goes wrong! Please try again later'),
+                    ),
+                  ],
+                ),
+              ),
+              buttonText: 'Good boy',
+              sharingText: 'Look what a cool dog I found! $newUrl',
+            );
+          } else {
+            return SizedBox();
+          }
+        },
       ),
     );
   }
@@ -69,7 +46,11 @@ class _DogPhotoPopUpState extends State<DogPhotoPopUp> {
     Uri url = Uri.parse('https://dog.ceo/api/breeds/image/random');
     http.Response response = await http.get(url);
     link = response.body;
-    List<String> list = link.split('"');
-    newUrl = list[3].replaceAll("\\", '');
+    if (response.statusCode == 200) {
+      List<String> list = link.split('"');
+      newUrl = list[3].replaceAll("\\", '');
+    } else {
+      throw Exception('Failed to load photo');
+    }
   }
 }

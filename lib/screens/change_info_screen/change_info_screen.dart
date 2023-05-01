@@ -1,8 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:practice_app/providers/user_info_provider.dart';
+import 'package:practice_app/screens/change_info_screen/components/name_text_fields.dart';
 import 'package:practice_app/widgets/drawer.dart';
+import 'package:provider/provider.dart';
 
 class ChangeInfoScreen extends StatefulWidget {
   static const String routeName = '/change_info';
@@ -13,65 +13,61 @@ class ChangeInfoScreen extends StatefulWidget {
 }
 
 class _ChangeInfoScreenState extends State<ChangeInfoScreen> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _surnameController = TextEditingController();
-
-  @override
-  void initState() {
-    _setDataToControllers();
-    super.initState();
-  }
+  bool isFirstTime = true;
+  late final UserInfoProvider provider;
 
   @override
   Widget build(BuildContext context) {
+    if (isFirstTime) {
+      provider = Provider.of<UserInfoProvider>(context);
+      isFirstTime = false;
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('Change your information'),
       ),
       drawer: MyDrawer(),
-      body: Column(
-        children: [
-          Container(
-            height: 300.0,
-            color: Colors.red,
-          ),
-          SizedBox(height: 32.0),
-          TextFormField(
-            controller: _nameController,
-            decoration: InputDecoration(hintText: 'Name'),
-          ),
-          TextFormField(
-            controller: _surnameController,
-            decoration: InputDecoration(hintText: 'Surname'),
-          ),
-          ElevatedButton(onPressed: _changeInfo, child: Text('Save'))
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 300,
+              width: 300,
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(300),
+                color: Colors.grey,
+              ),
+              child: provider.myImage == null
+                  ? Image.asset('assets/images/avatar.png',
+                      fit: BoxFit.cover, color: Colors.white)
+                  : Image(
+                      fit: BoxFit.cover,
+                      image: FileImage(provider.myImage!),
+                    ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    provider.changeImage();
+                  },
+                  child: Text('Change image'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    provider.deleteFile();
+                  },
+                  child: Text('Delete image'),
+                )
+              ],
+            ),
+            SizedBox(height: 32.0),
+            NameTextFields(),
+          ],
+        ),
       ),
     );
-  }
-
-  void _changeInfo() async {
-    final String key = 'user_info';
-    LazyBox<dynamic> _userInfo = await Hive.openLazyBox(key);
-    await _userInfo.put(key, _getDataFromFields);
-    await _userInfo.close();
-  }
-
-  void _setDataToControllers() async {
-    final String key = 'user_info';
-    LazyBox<dynamic> userInfo = await Hive.openLazyBox(key);
-    var json = await userInfo.get(key);
-    Map<String, dynamic> data = Map<String, dynamic>.from(json);
-    await userInfo.close();
-    
-    _nameController.text = data['name'] ?? '';
-    _surnameController.text = data['surname'] ?? '';
-  }
-
-  Map<String, String> get _getDataFromFields {
-    return {
-      'name': _nameController.text,
-      'surname': _surnameController.text,
-    };
   }
 }
