@@ -32,6 +32,7 @@ class MyDrawer extends StatelessWidget {
                       ChangeInfoRoute(),
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         state.path.isEmpty
                             ? CircleAvatar(
@@ -60,7 +61,7 @@ class MyDrawer extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                        SizedBox(width: AppSizes.w16),
+                        SizedBox(width: AppSizes.h16),
                         Text(
                           '${state.nameData?.name ?? DictionaryManager.instance.dictionaryChangeInfoScreen.nameField} ${state.nameData?.surname ?? DictionaryManager.instance.dictionaryChangeInfoScreen.surnameField}',
                           style: TextStyle(color: AppTextStyle.colorWhite),

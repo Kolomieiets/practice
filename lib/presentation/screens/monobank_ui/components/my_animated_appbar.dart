@@ -9,8 +9,6 @@ import 'package:practice_app/services/dictionary/dictionary_manager.dart';
 class MyAnimatedAppBar extends SliverPersistentHeaderDelegate {
   const MyAnimatedAppBar() : super();
 
-// TODO(Valentyna): fix animated AppBar on different sizes
-// TODO(Valentyna): fix calculator keyboard size on small screens
   @override
   double get maxExtent => AppSizes.h116;
 
@@ -28,19 +26,17 @@ class MyAnimatedAppBar extends SliverPersistentHeaderDelegate {
   ) {
     final double expendPercentage =
         1.0 - min(1, shrinkOffset / (maxExtent - minExtent));
-
     final interpolatedPadding = EdgeInsets.lerp(
       EdgeInsets.only(
-        bottom: minExtent / 5.5,
-        // AppSizes.h16,
+        bottom: 0,
         left: AppSizes.w60,
         right: 0.0,
-        top: 0.0,
+        top: AppSizes.h12,
       ),
       EdgeInsets.only(
-          top: AppSizes.h16,
-          left: AppSizes.h16,
-          ),
+        top: AppSizes.h45,
+        left: AppSizes.h16,
+      ),
       expendPercentage,
     );
     return Align(
@@ -60,9 +56,8 @@ class MyAnimatedAppBar extends SliverPersistentHeaderDelegate {
           child: Stack(
             children: [
               Container(
-                height: minExtent +
-                    (maxExtent - minExtent) * expendPercentage,
-                alignment: Alignment.bottomLeft,
+                height: minExtent + (maxExtent - minExtent) * expendPercentage,
+                alignment: Alignment.topLeft,
                 child: Padding(
                   padding: interpolatedPadding!,
                   child: Text(

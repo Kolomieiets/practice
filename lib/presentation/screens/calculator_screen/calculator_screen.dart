@@ -31,13 +31,14 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       ),
       drawer: MyDrawer(),
       child: Column(
+        // mainAxisAlignment: MainAxisAlignment.end,
         children: [
           ExampleField(example),
           Expanded(
             child: Container(
               child: GridView.builder(
                 padding: EdgeInsets.all(AppSizes.h10),
-                physics: NeverScrollableScrollPhysics(),
+                physics: ScrollPhysics(),
                 itemCount: CalculatorKeyboard.buttons.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
@@ -69,7 +70,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 },
               ),
             ),
-          )
+          ),
         ],
       ),
     );

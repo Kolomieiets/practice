@@ -9,16 +9,18 @@ class BackArrow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
+      top: AppSizes.h10,
       left: AppSizes.w10,
-      child: IconButton(
-        onPressed: () {
+      child: InkWell(
+          onTap: () {
           AppRouter.instance.replaceNamed(HomeScreen.routeName);
         },
-        icon: Icon(
-          Icons.arrow_back,
-          color: Colors.white,
+          child: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: AppSizes.h30,
+          ),
         ),
-      ),
     );
   }
 }

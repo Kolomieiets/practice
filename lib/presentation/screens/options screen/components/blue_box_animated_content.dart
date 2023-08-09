@@ -14,12 +14,12 @@ class BlueBoxAnimatedContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double interpolatedImageSize = AppSizes.w35 + (percent * 20);
+    final double interpolatedImageSize = AppSizes.h35 + (percent * 20);
     final double interpolatedTextSize = 200 + (percent * 100);
 
     final interpolatedPadding = EdgeInsets.lerp(
-      EdgeInsets.only(top: AppSizes.h8, left: AppSizes.w60, right: 0.0, bottom: AppSizes.h8),
-      EdgeInsets.only(left: AppSizes.w16, right: AppSizes.w16, bottom: AppSizes.h16),
+      EdgeInsets.only(top: AppSizes.h4, left: AppSizes.w60, right: 0.0, bottom: AppSizes.h4),
+      EdgeInsets.only(left: AppSizes.w16, right: AppSizes.w16, bottom: AppSizes.h8),
       percent,
     );
 
@@ -47,6 +47,7 @@ class BlueBoxAnimatedContent extends StatelessWidget {
                     height: AppSizes.h60,
                     width: interpolatedTextSize,
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         TelegramUserAvatar(interpolatedImageSize),
                         SizedBox(width: AppSizes.w8),

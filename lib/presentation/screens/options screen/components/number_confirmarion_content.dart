@@ -13,19 +13,21 @@ class NumberConfirmationContent extends StatelessWidget {
     return ItemsList(
       RichText(
         text: TextSpan(
-          text:'${DictionaryManager
-                        .instance.dictionaryTelegramScreen.updateNumber} ',
-          style: TextStyle(color: AppTextStyle.colorGrey,),
+          text:
+              '${DictionaryManager.instance.dictionaryTelegramScreen.updateNumber} ',
+          style: TextStyle(
+            color: AppTextStyle.colorGrey,
+          ),
           children: [
             TextSpan(
               text: DictionaryManager
-                        .instance.dictionaryTelegramScreen.learn_more,
+                  .instance.dictionaryTelegramScreen.learn_more,
               style: TextStyle(color: AppTextStyle.colorDarkBlue),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   _openLink('www.lipsum.com/');
                 },
-            )
+            ),
           ],
         ),
       ),

@@ -43,7 +43,8 @@ class OptionsScreen extends StatelessWidget {
                           child: Text(
                             '${DictionaryManager
                         .instance.dictionaryTelegramScreen.telegramFor} ${_text()}',
-                            style: TextStyle(color: AppTextStyle.colorGrey,),
+                        textAlign: TextAlign.center,
+                            style: TextStyle(color: AppTextStyle.colorGrey, fontSize: AppTextStyle.font10),
                           ),
                         )
                       ],

@@ -14,7 +14,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => AppSizes.h180;
 
   @override
-  double get minExtent => AppSizes.h85;
+  double get minExtent => AppSizes.h95;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;

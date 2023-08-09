@@ -11,9 +11,9 @@ class UserInfoStorage {
     _storageService.put(key: _key, value: jsonEncode(nameData));
   }
 
-  Future<NameData> get() async {
+  Future<NameData?> get() async {
     var data = await _storageService.get(_key);
-    return NameData.fromJson(jsonDecode(data));
+    return data == null ? null : NameData.fromJson(jsonDecode(data));
   }
 
   void delete() {
