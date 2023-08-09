@@ -34,10 +34,15 @@ class NotificationService {
 
   NotificationDetails notificationDetails() {
     return NotificationDetails(
-        android: AndroidNotificationDetails('channelId', 'channelName',
-        importance: Importance.max,
-        priority: Priority.max,
-        category: AndroidNotificationCategory.message,
+        android: AndroidNotificationDetails(
+          'channelId',
+          'channelName',
+          icon: 'logo',
+          // channelShowBadge: false,
+          // largeIcon: const DrawableResourceAndroidBitmap('logo'),
+          importance: Importance.max,
+          priority: Priority.max,
+          category: AndroidNotificationCategory.message,
         ),
         iOS: DarwinNotificationDetails());
   }
@@ -47,6 +52,7 @@ class NotificationService {
     String? title,
     String? body,
   }) async {
-    return notificationsPlugin.show(id, title, body, notificationDetails());
+    return notificationsPlugin.show(
+        id, title, body, await notificationDetails());
   }
 }
