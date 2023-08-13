@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:practice_app/config/injection_config.dart';
+import 'package:practice_app/resources/i18n/en.dart';
 import 'package:practice_app/services/dictionary/dictionaries/dictionary_api_screen.dart';
 import 'package:practice_app/services/dictionary/dictionaries/dictionary_authentication.dart';
 import 'package:practice_app/services/dictionary/dictionaries/dictionary_calculator_screen.dart';
@@ -47,7 +48,10 @@ class DictionaryManager {
   late final DictionaryWorkWithImagesScreen dictionaryWorkWithImagesScreen;
   late final DictionaryDrawer dictionaryDrawer;
 
-  DictionaryManager(Map<String, dynamic> dictionary) {
+  DictionaryManager(
+      // Map<String, dynamic> dictionary
+      ) {
+    Map<String, dynamic> dictionary = en;
     name = dictionary['name'];
     code = dictionary['code'];
     dictionaryApiScreen = DictionaryApiScreen(

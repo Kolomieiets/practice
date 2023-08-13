@@ -63,6 +63,25 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ChangeInfoScreen(),
       );
     },
+    SignupRoute.name: (routeData) {
+      final args = routeData.argsAs<SignupRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: SignupScreen(showLoginScreen: args.showLoginScreen),
+      );
+    },
+    ForgotPasswordRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ForgotPasswordScreen(),
+      );
+    },
+    AuthRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AuthScreen(),
+      );
+    },
     UiMonobankListRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -109,25 +128,6 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: ProvidersInitScreen(),
-      );
-    },
-    SignupRoute.name: (routeData) {
-      final args = routeData.argsAs<SignupRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: SignupScreen(showLoginScreen: args.showLoginScreen),
-      );
-    },
-    AuthRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const AuthScreen(),
-      );
-    },
-    ForgotPasswordRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const ForgotPasswordScreen(),
       );
     },
   };
@@ -246,6 +246,62 @@ class ChangeInfoRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [SignupScreen]
+class SignupRoute extends PageRouteInfo<SignupRouteArgs> {
+  SignupRoute({
+    required void Function() showLoginScreen,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SignupRoute.name,
+          args: SignupRouteArgs(showLoginScreen: showLoginScreen),
+          initialChildren: children,
+        );
+
+  static const String name = 'SignupRoute';
+
+  static const PageInfo<SignupRouteArgs> page = PageInfo<SignupRouteArgs>(name);
+}
+
+class SignupRouteArgs {
+  const SignupRouteArgs({required this.showLoginScreen});
+
+  final void Function() showLoginScreen;
+
+  @override
+  String toString() {
+    return 'SignupRouteArgs{showLoginScreen: $showLoginScreen}';
+  }
+}
+
+/// generated route for
+/// [ForgotPasswordScreen]
+class ForgotPasswordRoute extends PageRouteInfo<void> {
+  const ForgotPasswordRoute({List<PageRouteInfo>? children})
+      : super(
+          ForgotPasswordRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ForgotPasswordRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AuthScreen]
+class AuthRoute extends PageRouteInfo<void> {
+  const AuthRoute({List<PageRouteInfo>? children})
+      : super(
+          AuthRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AuthRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [UiMonobankListScreen]
 class UiMonobankListRoute extends PageRouteInfo<void> {
   const UiMonobankListRoute({List<PageRouteInfo>? children})
@@ -353,62 +409,6 @@ class ProvidersInitRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ProvidersInitRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [SignupScreen]
-class SignupRoute extends PageRouteInfo<SignupRouteArgs> {
-  SignupRoute({
-    required void Function() showLoginScreen,
-    List<PageRouteInfo>? children,
-  }) : super(
-          SignupRoute.name,
-          args: SignupRouteArgs(showLoginScreen: showLoginScreen),
-          initialChildren: children,
-        );
-
-  static const String name = 'SignupRoute';
-
-  static const PageInfo<SignupRouteArgs> page = PageInfo<SignupRouteArgs>(name);
-}
-
-class SignupRouteArgs {
-  const SignupRouteArgs({required this.showLoginScreen});
-
-  final void Function() showLoginScreen;
-
-  @override
-  String toString() {
-    return 'SignupRouteArgs{showLoginScreen: $showLoginScreen}';
-  }
-}
-
-/// generated route for
-/// [AuthScreen]
-class AuthRoute extends PageRouteInfo<void> {
-  const AuthRoute({List<PageRouteInfo>? children})
-      : super(
-          AuthRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'AuthRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [ForgotPasswordScreen]
-class ForgotPasswordRoute extends PageRouteInfo<void> {
-  const ForgotPasswordRoute({List<PageRouteInfo>? children})
-      : super(
-          ForgotPasswordRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'ForgotPasswordRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -23,8 +23,7 @@ class AuthScreen extends StatelessWidget {
         if (snapshot.hasError) {
           return Center(
             child: Text(
-              DictionaryManager.instance.dictionaryErrors.oops,
-            ),
+              DictionaryManager.instance.dictionaryErrors.oops,),
           );
         } else if (snapshot.hasData) {
           return HomeScreen();

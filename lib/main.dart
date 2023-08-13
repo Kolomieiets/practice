@@ -7,9 +7,9 @@ import 'package:practice_app/config/injection_config.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await Hive.initFlutter();
   initDependencies();
   setupGetIt();
 
-  await Hive.initFlutter();
   runApp(Application());
 }

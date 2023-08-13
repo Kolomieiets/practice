@@ -15,6 +15,8 @@ import 'package:practice_app/config/auto_router.dart' as _i3;
 import 'package:practice_app/presentation/dialogs/dialog_manager.dart' as _i5;
 import 'package:practice_app/services/authentication/authentication.dart'
     as _i4;
+import 'package:practice_app/services/dictionary/dictionary_manager.dart'
+    as _i6;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -30,6 +32,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i3.AppRouter>(_i3.AppRouter());
     gh.singleton<_i4.Authentication>(_i4.Authentication());
     gh.singleton<_i5.DialogManager>(_i5.DialogManager());
+    gh.singleton<_i6.DictionaryManager>(_i6.DictionaryManager());
     return this;
   }
 }
