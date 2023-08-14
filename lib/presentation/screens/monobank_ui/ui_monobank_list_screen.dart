@@ -6,7 +6,7 @@ import 'package:practice_app/presentation/screens/monobank_ui/components/my_anim
 import 'package:practice_app/presentation/screens/monobank_ui/components/persistent_header.dart';
 import 'package:practice_app/presentation/screens/monobank_ui/components/user_info.dart';
 import 'package:practice_app/presentation/screens/monobank_ui/components/user_item_builder.dart';
-import 'package:practice_app/presentation/screens/monobank_ui/components/users_list.dart';
+import 'package:practice_app/services/global/entity/users_list.dart';
 
 @RoutePage()
 class UiMonobankListScreen extends StatefulWidget {

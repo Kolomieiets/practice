@@ -1,5 +1,4 @@
 import 'package:practice_app/presentation/screens/options%20screen/components/telegram_user.dart';
-// TODO(Valentyna): move to resources?
 class MyTelegramUserInfo {
   static final TelegramUser _user = TelegramUser(
     firstName: 'Mr.',

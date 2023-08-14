@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practice_app/presentation/screens/options%20screen/components/my_telegram_user_info.dart';
+import 'package:practice_app/services/global/entity/my_telegram_user_info.dart';
 import 'package:practice_app/presentation/screens/options%20screen/components/telegram_no_image_avatar.dart';
 import 'package:practice_app/resources/app_sizes.dart';
 

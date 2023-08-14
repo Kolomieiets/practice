@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:practice_app/config/auto_router.dart';
 import 'package:practice_app/presentation/dialogs/dialog_manager.dart';
 import 'package:practice_app/presentation/dialogs/dialogs/loading_dialog.dart';
 import 'package:practice_app/presentation/screens/login_screen/components/auth_change_text.dart';
@@ -123,6 +124,8 @@ class _SignupScreenState extends State<SignupScreen> with SignupMixin {
                         DialogManager.instance.close(context);
                         if (error != null) {
                           errorCheck(error!);
+                        } else {
+                          AppRouter.instance.replace(HomeRoute());
                         }
                       },
                       child: Text(

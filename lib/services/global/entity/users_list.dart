@@ -1,5 +1,4 @@
 import 'package:practice_app/services/global/entity/monobank_user.dart';
-// TODO(Valentyna):Move this list to resources
 class UsersList {
   static List<MonobankUser> _users = [
     MonobankUser(

@@ -3,7 +3,7 @@ import 'package:practice_app/presentation/screens/monobank_ui/components/alphabe
 import 'package:practice_app/presentation/screens/monobank_ui/components/avatar.dart';
 import 'package:practice_app/presentation/screens/monobank_ui/components/bank_card.dart';
 import 'package:practice_app/presentation/screens/monobank_ui/components/user_info.dart';
-import 'package:practice_app/presentation/screens/monobank_ui/components/users_list.dart';
+import 'package:practice_app/services/global/entity/users_list.dart';
 import 'package:practice_app/resources/app_sizes.dart';
 import 'package:practice_app/resources/style/app_text_style.dart';
 

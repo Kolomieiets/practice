@@ -111,6 +111,8 @@ class _LoginScreenState extends State<LoginScreen> with LoginMixin {
                         DialogManager.instance.close(context);
                         if (error != null) {
                           checkError(error!);
+                        } else {
+                          AppRouter.instance.replace(HomeRoute());
                         }
                       },
                       child: Text(

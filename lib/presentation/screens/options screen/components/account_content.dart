@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:practice_app/presentation/screens/options%20screen/components/account_list_item_content.dart';
 import 'package:practice_app/presentation/screens/options%20screen/components/block_name.dart';
 import 'package:practice_app/presentation/screens/options%20screen/components/items_list.dart';
-import 'package:practice_app/presentation/screens/options%20screen/components/my_telegram_user_info.dart';
+import 'package:practice_app/services/global/entity/my_telegram_user_info.dart';
 import 'package:practice_app/presentation/screens/options%20screen/components/white_block_layout.dart';
 import 'package:practice_app/resources/app_sizes.dart';
 import 'package:practice_app/services/dictionary/dictionary_manager.dart';

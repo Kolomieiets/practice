@@ -1,6 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/presentation/screens/options%20screen/components/my_telegram_user_info.dart';
+import 'package:practice_app/services/global/entity/my_telegram_user_info.dart';
 
 class AnimatedName extends StatelessWidget {
   final TextStyle? style;

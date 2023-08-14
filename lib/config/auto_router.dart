@@ -8,7 +8,8 @@ import 'package:practice_app/presentation/screens/chart_screen/chart_screen.dart
 import 'package:practice_app/presentation/screens/device_info_screen/device_info_screen.dart';
 import 'package:practice_app/presentation/screens/geolocation_screen/geolocation.dart';
 import 'package:practice_app/presentation/screens/home_screen/home_screen.dart';
-import 'package:practice_app/presentation/screens/login_screen/auth_screen.dart';
+import 'package:practice_app/presentation/screens/login_screen/components/auth_screen.dart';
+import 'package:practice_app/presentation/screens/login_screen/splash_screen.dart';
 import 'package:practice_app/presentation/screens/login_screen/components/signup_screen.dart';
 import 'package:practice_app/presentation/screens/login_screen/forgot_password_screen.dart';
 import 'package:practice_app/presentation/screens/monobank_ui/ui_monobank_list_screen.dart';
@@ -31,7 +32,8 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes {
     return [
       AutoRoute(page: ForgotPasswordRoute.page, path: ForgotPasswordScreen.routeName),
-      AutoRoute(page: AuthRoute.page, path: AuthScreen.routeName, initial: true),
+      AutoRoute(page: SplashRoute.page, path: SplashScreen.routeName, initial: true),
+      AutoRoute(page: AuthRoute.page, path: AuthScreen.routeName),
       AutoRoute(page: HomeRoute.page, path: HomeScreen.routeName),
       AutoRoute(page: VideoRoute.page, path: VideoScreen.routeName),
       AutoRoute(page: DeviceInfoRoute.page, path: DeviceInfoScreen.routeName),

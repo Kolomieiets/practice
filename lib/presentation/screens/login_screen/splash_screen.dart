@@ -1,14 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/presentation/screens/home_screen/home_screen.dart';
-import 'package:practice_app/presentation/screens/login_screen/components/auth_screen_setup.dart';
+import 'package:practice_app/config/auto_router.dart';
 import 'package:practice_app/services/dictionary/dictionary_manager.dart';
 
 @RoutePage()
-class AuthScreen extends StatelessWidget {
-  static String routeName = '/auth';
-  const AuthScreen({super.key});
+class SplashScreen extends StatelessWidget {
+  static String routeName = '/splash';
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +22,21 @@ class AuthScreen extends StatelessWidget {
         if (snapshot.hasError) {
           return Center(
             child: Text(
-              DictionaryManager.instance.dictionaryErrors.oops,),
+              DictionaryManager.instance.dictionaryErrors.oops,
+            ),
           );
         } else if (snapshot.hasData) {
-          return HomeScreen();
-        } else {
-          return AuthScreenSetup();
+          // return HomeScreen();
+          print('YAY authoruzed => ${snapshot.data}');
+          AppRouter.instance.replace(HomeRoute());
+        } else if (snapshot.data == null) {
+          // return AuthScreenSetup();
+          print('YAY unauthoruzed => ${snapshot.data}');
+          AppRouter.instance.replace(AuthRoute());
         }
+        return ColoredBox(
+          color: Colors.red,
+        );
       },
     );
   }

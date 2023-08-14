@@ -76,12 +76,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ForgotPasswordScreen(),
       );
     },
-    AuthRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const AuthScreen(),
-      );
-    },
     UiMonobankListRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -128,6 +122,18 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: ProvidersInitScreen(),
+      );
+    },
+    AuthRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AuthScreen(),
+      );
+    },
+    SplashRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SplashScreen(),
       );
     },
   };
@@ -288,20 +294,6 @@ class ForgotPasswordRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [AuthScreen]
-class AuthRoute extends PageRouteInfo<void> {
-  const AuthRoute({List<PageRouteInfo>? children})
-      : super(
-          AuthRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'AuthRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [UiMonobankListScreen]
 class UiMonobankListRoute extends PageRouteInfo<void> {
   const UiMonobankListRoute({List<PageRouteInfo>? children})
@@ -409,6 +401,34 @@ class ProvidersInitRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ProvidersInitRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [AuthScreen]
+class AuthRoute extends PageRouteInfo<void> {
+  const AuthRoute({List<PageRouteInfo>? children})
+      : super(
+          AuthRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AuthRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SplashScreen]
+class SplashRoute extends PageRouteInfo<void> {
+  const SplashRoute({List<PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
