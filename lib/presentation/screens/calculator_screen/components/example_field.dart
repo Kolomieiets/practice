@@ -11,7 +11,8 @@ class ExampleField extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: AppSizes.w16, vertical: AppSizes.h16),
       alignment: Alignment.bottomRight,
-      height: MediaQuery.of(context).size.height * AppSizes.h2a,
+      // height: MediaQuery.of(context).size.height * AppSizes.h2a,
+      height: MediaQuery.of(context).size.height / 3,
       child: Text(
         example,
         style: TextStyle(fontSize: AppTextStyle.font40),

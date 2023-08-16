@@ -31,44 +31,43 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       ),
       drawer: MyDrawer(),
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           ExampleField(example),
-          Expanded(
-            child: Container(
-              child: GridView.builder(
-                padding: EdgeInsets.all(AppSizes.h10),
-                physics: ScrollPhysics(),
-                itemCount: CalculatorKeyboard.buttons.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  childAspectRatio: 1.3,
-                  mainAxisSpacing: AppSizes.h5,
-                  crossAxisSpacing: AppSizes.w5,
-                ),
-                itemBuilder: (context, int index) {
-                  return InkWell(
-                    onTap: () {
-                      if (CalculatorKeyboard.buttons[index] == 'DEL') {
-                        if (example != '') {
-                          example = example.substring(0, example.length - 1);
-                        }
-                      } else if (CalculatorKeyboard.buttons[index] == 'C') {
-                        example = '';
-                      } else if (CalculatorKeyboard.buttons[index] == '=') {
-                        example = CalculatorFunction.calculator(example)!;
-                        if (example.endsWith('.0')) {
-                          example = example.substring(0, example.length - 2);
-                        }
-                      } else {
-                        example += CalculatorKeyboard.buttons[index];
-                      }
-                      setState(() {});
-                    },
-                    child: CalculatorButtons(index),
-                  );
-                },
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 2,
+            child: GridView.builder(
+              padding: EdgeInsets.all(AppSizes.h10),
+              physics: ScrollPhysics(),
+              itemCount: CalculatorKeyboard.buttons.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                childAspectRatio: 1.3,
+                mainAxisSpacing: AppSizes.h5,
+                crossAxisSpacing: AppSizes.w5,
               ),
+              itemBuilder: (context, int index) {
+                return InkWell(
+                  onTap: () {
+                    if (CalculatorKeyboard.buttons[index] == 'DEL') {
+                      if (example != '') {
+                        example = example.substring(0, example.length - 1);
+                      }
+                    } else if (CalculatorKeyboard.buttons[index] == 'C') {
+                      example = '';
+                    } else if (CalculatorKeyboard.buttons[index] == '=') {
+                      example = CalculatorFunction.calculator(example)!;
+                      if (example.endsWith('.0')) {
+                        example = example.substring(0, example.length - 2);
+                      }
+                    } else {
+                      example += CalculatorKeyboard.buttons[index];
+                    }
+                    setState(() {});
+                  },
+                  child: CalculatorButtons(index),
+                );
+              },
             ),
           ),
         ],

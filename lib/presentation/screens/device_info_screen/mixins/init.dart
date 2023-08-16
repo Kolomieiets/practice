@@ -25,7 +25,7 @@ mixin Init<T extends StatefulWidget> on State<DeviceInfoScreen> {
       allInfo +=
           '${DictionaryManager.instance.dictionaryDeviceInfoScreen.device} ${androidInfo.device}';
       allInfo += ' ${androidInfo.hardware}';
-    } else if (Platform.isAndroid) {
+    } else if (Platform.isIOS) {
       IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
       allInfo = iosInfo.systemName!;
       allInfo += ' ${iosInfo.model}';
