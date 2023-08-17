@@ -4,11 +4,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practice_app/config/auto_router.dart';
-import 'package:practice_app/providers/bloc/user_info_bloc.dart';
 import 'package:practice_app/resources/app_sizes.dart';
 import 'package:practice_app/resources/style/app_text_style.dart';
 import 'package:practice_app/services/dictionary/dictionary_manager.dart';
 import 'package:practice_app/services/global/entity/name_data.dart';
+import 'package:practice_app/services/global/state_manager/bloc/user_info_bloc/user_info_bloc.dart';
 
 class MyDrawer extends StatelessWidget {
   final NameData nameData = NameData();
@@ -18,11 +18,11 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           SizedBox(
             height: AppSizes.h110,
             child: DrawerHeader(
+              padding: EdgeInsets.only(bottom: AppSizes.h10),
               margin: EdgeInsets.zero,
               decoration: BoxDecoration(color: Colors.black),
               child: BlocBuilder<UserInfoBloc, UserInfoState>(
@@ -32,7 +32,6 @@ class MyDrawer extends StatelessWidget {
                       ChangeInfoRoute(),
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         state.path.isEmpty
                             ? CircleAvatar(
@@ -46,25 +45,17 @@ class MyDrawer extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                               )
-                            : Container(
-                                height: AppSizes.h50,
-                                width: AppSizes.h50,
-                                clipBehavior: Clip.hardEdge,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.circular(AppSizes.h50),
-                                ),
-                                child: Image.file(
-                                  File(state.path),
-                                  height: AppSizes.h50,
-                                  width: AppSizes.w50,
-                                  fit: BoxFit.cover,
-                                ),
+                            : CircleAvatar(
+                                backgroundImage: FileImage(File(state.path)),
+                                radius: AppSizes.h50,
                               ),
-                        SizedBox(width: AppSizes.h16),
-                        Text(
-                          '${state.nameData?.name ?? DictionaryManager.instance.dictionaryChangeInfoScreen.nameField} ${state.nameData?.surname ?? DictionaryManager.instance.dictionaryChangeInfoScreen.surnameField}',
-                          style: TextStyle(color: AppTextStyle.colorWhite),
+                        SizedBox(
+                          width: AppSizes.w100,
+                          child: Text(
+                            '${state.nameData?.name ?? DictionaryManager.instance.dictionaryChangeInfoScreen.nameField} ${state.nameData?.surname ?? DictionaryManager.instance.dictionaryChangeInfoScreen.surnameField}',
+                            style: TextStyle(color: AppTextStyle.colorWhite),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),
@@ -77,89 +68,108 @@ class MyDrawer extends StatelessWidget {
             child: ListView(
               children: [
                 _listItem(
-                    title: DictionaryManager.instance.dictionaryDrawer.homeScreen,
-                    subtitle: DictionaryManager.instance.dictionaryDrawer.homeScreenSubtitle,
+                    title:
+                        DictionaryManager.instance.dictionaryDrawer.homeScreen,
+                    subtitle: DictionaryManager
+                        .instance.dictionaryDrawer.homeScreenSubtitle,
                     routeName: HomeRoute(),
                     ctx: context),
                 const Divider(),
                 _listItem(
-                    title: DictionaryManager.instance.dictionaryDrawer.changeUserInfo,
-                    subtitle: DictionaryManager.instance.dictionaryDrawer.changeUserInfoSubtitle,
+                    title: DictionaryManager
+                        .instance.dictionaryDrawer.changeUserInfo,
+                    subtitle: DictionaryManager
+                        .instance.dictionaryDrawer.changeUserInfoSubtitle,
                     routeName: ChangeInfoRoute(),
                     ctx: context),
                 const Divider(),
                 _listItem(
-                    title: DictionaryManager.instance.dictionaryDrawer.urlLauncher,
-                    subtitle: DictionaryManager.instance.dictionaryDrawer.urlLauncherSubtitle,
+                    title:
+                        DictionaryManager.instance.dictionaryDrawer.urlLauncher,
+                    subtitle: DictionaryManager
+                        .instance.dictionaryDrawer.urlLauncherSubtitle,
                     routeName: UrlLauncherRoute(),
                     ctx: context),
                 const Divider(),
                 _listItem(
-                    title: DictionaryManager.instance.dictionaryDrawer.workWithImages,
-                    subtitle: DictionaryManager.instance.dictionaryDrawer.workWithImagesSubtitle,
+                    title: DictionaryManager
+                        .instance.dictionaryDrawer.workWithImages,
+                    subtitle: DictionaryManager
+                        .instance.dictionaryDrawer.workWithImagesSubtitle,
                     routeName: WorkWithImagesRoute(),
                     ctx: context),
                 const Divider(),
                 _listItem(
-                    title: DictionaryManager.instance.dictionaryDrawer.geolocation,
-                    subtitle: DictionaryManager.instance.dictionaryDrawer.geolocationSubtitle,
+                    title:
+                        DictionaryManager.instance.dictionaryDrawer.geolocation,
+                    subtitle: DictionaryManager
+                        .instance.dictionaryDrawer.geolocationSubtitle,
                     routeName: GeolocationRoute(),
                     ctx: context),
                 const Divider(),
                 _listItem(
-                    title: DictionaryManager.instance.dictionaryDrawer.deviceInfo,
-                    subtitle:
-                        DictionaryManager.instance.dictionaryDrawer.deviceInfoSubtitle,
+                    title:
+                        DictionaryManager.instance.dictionaryDrawer.deviceInfo,
+                    subtitle: DictionaryManager
+                        .instance.dictionaryDrawer.deviceInfoSubtitle,
                     routeName: DeviceInfoRoute(),
                     ctx: context),
                 const Divider(),
                 _listItem(
-                    title: DictionaryManager.instance.dictionaryDrawer.shimmerLoading,
-                    subtitle: DictionaryManager.instance.dictionaryDrawer.shimmerLoadingSubtitle,
+                    title: DictionaryManager
+                        .instance.dictionaryDrawer.shimmerLoading,
+                    subtitle: DictionaryManager
+                        .instance.dictionaryDrawer.shimmerLoadingSubtitle,
                     routeName: ShimmerLoadingRoute(),
                     ctx: context),
                 const Divider(),
                 _listItem(
-                    title: DictionaryManager.instance.dictionaryDrawer.sensorsPlus,
-                    subtitle:
-                    DictionaryManager.instance.dictionaryDrawer.sensorsPlusSubtitle,
+                    title:
+                        DictionaryManager.instance.dictionaryDrawer.sensorsPlus,
+                    subtitle: DictionaryManager
+                        .instance.dictionaryDrawer.sensorsPlusSubtitle,
                     routeName: ProvidersInitRoute(),
                     ctx: context),
                 const Divider(),
                 _listItem(
                     title: DictionaryManager.instance.dictionaryDrawer.monobank,
-                    subtitle: DictionaryManager.instance.dictionaryDrawer.monobankSubtitle,
+                    subtitle: DictionaryManager
+                        .instance.dictionaryDrawer.monobankSubtitle,
                     routeName: UiMonobankListRoute(),
                     ctx: context),
                 const Divider(),
                 _listItem(
                     title: DictionaryManager.instance.dictionaryDrawer.telegram,
-                    subtitle: DictionaryManager.instance.dictionaryDrawer.telegramSubtitle,
+                    subtitle: DictionaryManager
+                        .instance.dictionaryDrawer.telegramSubtitle,
                     routeName: OptionsRoute(),
                     ctx: context),
                 const Divider(),
                 _listItem(
                     title: DictionaryManager.instance.dictionaryDrawer.api,
                     subtitle:
-                    DictionaryManager.instance.dictionaryDrawer.apiSubtitle,
+                        DictionaryManager.instance.dictionaryDrawer.apiSubtitle,
                     routeName: ApiRequestsRoute(),
                     ctx: context),
                 const Divider(),
                 _listItem(
-                    title: DictionaryManager.instance.dictionaryDrawer.calculator,
+                    title:
+                        DictionaryManager.instance.dictionaryDrawer.calculator,
                     subtitle: '',
                     routeName: CalculatorRoute(),
                     ctx: context),
                 const Divider(),
                 _listItem(
                     title: DictionaryManager.instance.dictionaryDrawer.chart,
-                    subtitle: DictionaryManager.instance.dictionaryDrawer.chartSubtitle,
+                    subtitle: DictionaryManager
+                        .instance.dictionaryDrawer.chartSubtitle,
                     routeName: ChartRoute(),
                     ctx: context),
                 const Divider(),
                 _listItem(
                     title: DictionaryManager.instance.dictionaryDrawer.video,
-                    subtitle: DictionaryManager.instance.dictionaryDrawer.videoSubtitle,
+                    subtitle: DictionaryManager
+                        .instance.dictionaryDrawer.videoSubtitle,
                     routeName: VideoRoute(),
                     ctx: context),
               ],

@@ -31,28 +31,35 @@ class _UiMonobankListScreenState extends State<UiMonobankListScreen> {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-        child: CustomScrollView(
-          slivers: [
-            const SliverPersistentHeader(
-              pinned: true,
-              delegate: MyAnimatedAppBar(),
+        child: Container(
+          color: Colors.black87,
+          child: SafeArea(
+            bottom: false,
+            child: CustomScrollView(
+              physics: ClampingScrollPhysics(),
+              slivers: [
+                const SliverPersistentHeader(
+                  pinned: true,
+                  delegate: MyAnimatedAppBar(),
+                ),
+                SliverPersistentHeader(
+                  pinned: true,
+                  delegate: PersistentHeader(),
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      String id = users[index].id;
+                      _checkFirst(index);
+                      _setColor(index);
+                      return UserItemBuilder(id, index, users, _isFirst);
+                    },
+                    childCount: UsersList.users.length
+                  ),
+                ),
+              ],
             ),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: PersistentHeader(),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  String id = users[index].id;
-                  _checkFirst(index);
-                  _setColor(index);
-                  return UserItemBuilder(id, index, users, _isFirst);
-                },
-                childCount: UsersList.users.length
-              ),
-            ),
-          ],
+          ),
         ),
     );
   }

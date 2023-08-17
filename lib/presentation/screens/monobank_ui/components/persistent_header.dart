@@ -15,17 +15,10 @@ class PersistentHeader extends SliverPersistentHeaderDelegate {
         padding: EdgeInsets.symmetric(
             horizontal: AppSizes.h16, vertical: AppSizes.h12),
         child:
-            //  Row(
-            //   crossAxisAlignment: CrossAxisAlignment.center,
-            //   children: [
             SizedBox(
           height: AppSizes.h50,
           width: MediaQuery.of(context).size.width - 32,
-          child:
-              // Column(
-              //   mainAxisAlignment: MainAxisAlignment.start,
-              //   children: [
-              TextField(
+          child: TextField(
             cursorColor: Colors.white,
             style: TextStyle(
               color: AppTextStyle.colorWhite,

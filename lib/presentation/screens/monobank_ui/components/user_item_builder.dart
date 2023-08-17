@@ -17,34 +17,37 @@ class UserItemBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int monobankUserIndex = _findUserIndexById(id);
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: AppSizes.h16,
-        vertical: AppSizes.w12,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (isFirst) AlphabetLetter(sortedListIndex, users),
-          Row(children: [
-            Avatar(monobankUserIndex, sortedListIndex, users),
-            SizedBox(width: AppSizes.w16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  users[sortedListIndex].title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: AppTextStyle.font16,
+    return ColoredBox(
+      color: Colors.white,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSizes.h16,
+          vertical: AppSizes.w12,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (isFirst) AlphabetLetter(sortedListIndex, users),
+            Row(children: [
+              Avatar(monobankUserIndex, sortedListIndex, users),
+              SizedBox(width: AppSizes.w16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    users[sortedListIndex].title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: AppTextStyle.font16,
+                    ),
                   ),
-                ),
-                SizedBox(height: AppSizes.h2),
-                BankCard(monobankUserIndex),
-              ],
-            ),
-          ]),
-        ],
+                  SizedBox(height: AppSizes.h2),
+                  BankCard(monobankUserIndex),
+                ],
+              ),
+            ]),
+          ],
+        ),
       ),
     );
   }

@@ -9,7 +9,7 @@ class QrSearchMenuButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
                 right: AppSizes.w10,
-                top: AppSizes.h10,
+                top: AppSizes.h16,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

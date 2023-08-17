@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/config/auto_router.dart';
+import 'package:practice_app/resources/app_sizes.dart';
 import 'package:practice_app/services/dictionary/dictionary_manager.dart';
 
 @RoutePage()
@@ -14,30 +15,36 @@ class SplashScreen extends StatelessWidget {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
-        // if (snapshot.connectionState == ConnectionState.waiting) {
-        //   return Center(
-        //     child: CircularProgressIndicator(),
-        //   );
-        // } else
         if (snapshot.hasError) {
           return Center(
-            child: Text(
-              DictionaryManager.instance.dictionaryErrors.oops,
-            ),
+            child: Text(DictionaryManager.instance.dictionaryErrors.oops),
           );
-        } else if (snapshot.hasData) {
-          // return HomeScreen();
-          print('YAY authoruzed => ${snapshot.data}');
-          AppRouter.instance.replace(HomeRoute());
-        } else if (snapshot.data == null) {
-          // return AuthScreenSetup();
-          print('YAY unauthoruzed => ${snapshot.data}');
-          AppRouter.instance.replace(AuthRoute());
         }
+
+        if (snapshot.connectionState == ConnectionState.active ||
+            snapshot.connectionState == ConnectionState.done) {
+          replaceScreen(snapshot);
+        }
+
         return ColoredBox(
-          color: Colors.red,
+          color: Colors.white,
+          child: Center(
+            child: Image.asset(
+              'assets/images/splashscreen.png',
+              width: AppSizes.h80,
+              // height: 100,
+            ),
+          ),
         );
       },
     );
+  }
+
+  void replaceScreen(AsyncSnapshot<User?> snapshot) {
+    if (snapshot.hasData) {
+      AppRouter.instance.replace(HomeRoute());
+    } else if (!snapshot.hasData) {
+      AppRouter.instance.replace(AuthRoute());
+    }
   }
 }

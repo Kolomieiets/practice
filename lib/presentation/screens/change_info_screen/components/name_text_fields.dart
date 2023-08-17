@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practice_app/presentation/dialogs/dialog_manager.dart';
 import 'package:practice_app/presentation/dialogs/dialogs/logout_dialog.dart';
-import 'package:practice_app/providers/bloc/user_info_bloc.dart';
 import 'package:practice_app/resources/app_sizes.dart';
 import 'package:practice_app/services/dictionary/dictionary_manager.dart';
 import 'package:practice_app/services/global/entity/name_data.dart';
+import 'package:practice_app/services/global/state_manager/bloc/user_info_bloc/user_info_bloc.dart';
 
 class NameTextFields extends StatefulWidget {
   const NameTextFields({super.key});

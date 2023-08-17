@@ -4,11 +4,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practice_app/presentation/layouts/main_layout.dart';
-import 'package:practice_app/providers/bloc/user_info_bloc.dart';
 import 'package:practice_app/presentation/screens/change_info_screen/components/name_text_fields.dart';
 import 'package:practice_app/presentation/widgets/drawer.dart';
 import 'package:practice_app/resources/app_sizes.dart';
 import 'package:practice_app/services/dictionary/dictionary_manager.dart';
+import 'package:practice_app/services/global/state_manager/bloc/user_info_bloc/user_info_bloc.dart';
 
 @RoutePage()
 class ChangeInfoScreen extends StatefulWidget {

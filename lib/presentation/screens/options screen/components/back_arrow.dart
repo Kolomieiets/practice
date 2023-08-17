@@ -9,7 +9,7 @@ class BackArrow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: AppSizes.h10,
+      top: AppSizes.h16,
       left: AppSizes.w10,
       child: InkWell(
           onTap: () {

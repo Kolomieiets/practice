@@ -20,40 +20,47 @@ class OptionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-        child: CustomScrollView(
-          slivers: [
-            const SliverPersistentHeader(
-              pinned: true,
-              delegate: CustomSliverAppBarDelegate(),
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  ColoredBox(
-                    color: Color.fromARGB(255, 243, 243, 243),
-                    child: Column(
-                      children: [
-                        AccountContent(),
-                        NumberConfirmation(),
-                        SettingsContent(),
-                        PremiumContent(),
-                        HelpContent(),
-                        SizedBox(
-                          height: AppSizes.h50,
-                          child: Text(
-                            '${DictionaryManager
-                        .instance.dictionaryTelegramScreen.telegramFor} ${_text()}',
-                        textAlign: TextAlign.center,
-                            style: TextStyle(color: AppTextStyle.colorGrey, fontSize: AppTextStyle.font10),
-                          ),
-                        )
-                      ],
-                    ),
+        child: Container(
+          color: Colors.lightBlue,
+          child: SafeArea(
+            bottom: false,
+            child: CustomScrollView(
+              physics: ClampingScrollPhysics(),
+              slivers: [
+                const SliverPersistentHeader(
+                  pinned: true,
+                  delegate: CustomSliverAppBarDelegate(),
+                ),
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      ColoredBox(
+                        color: Color.fromARGB(255, 243, 243, 243),
+                        child: Column(
+                          children: [
+                            AccountContent(),
+                            NumberConfirmation(),
+                            SettingsContent(),
+                            PremiumContent(),
+                            HelpContent(),
+                            SizedBox(
+                              height: AppSizes.h50,
+                              child: Text(
+                                '${DictionaryManager
+                            .instance.dictionaryTelegramScreen.telegramFor} ${_text()}',
+                            textAlign: TextAlign.center,
+                                style: TextStyle(color: AppTextStyle.colorGrey, fontSize: AppTextStyle.font10),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            )
-          ],
+                )
+              ],
+            ),
+          ),
         ),
     );
   }

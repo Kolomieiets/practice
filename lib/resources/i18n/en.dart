@@ -114,8 +114,8 @@ const Map<String, dynamic> en = {
     'mobile_connection': 'Device connected to a mobile network.',
     'wifi_connection': 'Device connected to a wi-fi network.',
     'no_connection': 'Device does not connect to network.',
-    'connection': 'Connection',
-    'battery': 'Battery level',
+    'connection': 'Connection:',
+    'battery': 'Battery level:',
   },
   'geolocation_screen': {
     'title': 'Get user Location',

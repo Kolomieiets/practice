@@ -2,17 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:practice_app/config/auto_router.dart';
-import 'package:practice_app/providers/bloc/user_info_bloc.dart';
 import 'package:practice_app/resources/style/app_theme.dart';
+import 'package:practice_app/services/global/state_manager/bloc/user_info_bloc/user_info_bloc.dart';
 
 // TODO(Valentyna): url launcher unavailable to send email and make call
 // TODO(Valentyna): wrong location google map
 // TODO(Valentyna): battery level unavailable
-// TODO(Valentyna): remove red screen
-// TODO(Valentyna): url launcher button loader
 // TODO(Valentyna): sensors plus
-// TODO(Valentyna): monobank screen
-// TODO(Valentyna): telegram screen
 // TODO(Valentyna): video
 class Application extends StatelessWidget {
   @override
@@ -24,6 +20,12 @@ class Application extends StatelessWidget {
         designSize: const Size(392.7, 825.5),
         builder: (context, child) {
           return MaterialApp.router(
+            builder: (context, child) {
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.1),
+                child: child!,
+              );
+            },
             title: 'Flutter Demo',
             theme: ThemeData(primarySwatch: AppTheme.primaryBlack),
             routerConfig: AppRouter.instance.config(),

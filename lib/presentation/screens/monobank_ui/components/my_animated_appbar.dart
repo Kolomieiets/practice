@@ -10,10 +10,10 @@ class MyAnimatedAppBar extends SliverPersistentHeaderDelegate {
   const MyAnimatedAppBar() : super();
 
   @override
-  double get maxExtent => AppSizes.h116;
+  double get maxExtent => AppSizes.h95;
 
   @override
-  double get minExtent => AppSizes.h85;
+  double get minExtent => AppSizes.h60;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
@@ -31,10 +31,10 @@ class MyAnimatedAppBar extends SliverPersistentHeaderDelegate {
         bottom: 0,
         left: AppSizes.w60,
         right: 0.0,
-        top: AppSizes.h12,
+        top: AppSizes.h18,
       ),
       EdgeInsets.only(
-        top: AppSizes.h45,
+        top: AppSizes.h60,
         left: AppSizes.h16,
       ),
       expendPercentage,
@@ -52,29 +52,27 @@ class MyAnimatedAppBar extends SliverPersistentHeaderDelegate {
             ),
           ],
         ),
-        child: SafeArea(
-          child: Stack(
-            children: [
-              Container(
-                height: minExtent + (maxExtent - minExtent) * expendPercentage,
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: interpolatedPadding!,
-                  child: Text(
-                    DictionaryManager
-                        .instance.dictionaryMonobankScreen.title,
-                    style: TextStyle(
-                      fontSize: AppTextStyle.font18,
-                      fontWeight: FontWeight.w500,
-                      color: AppTextStyle.colorWhite,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+        child: Stack(
+          children: [
+            Container(
+              height: minExtent + (maxExtent - minExtent) * expendPercentage,
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: interpolatedPadding!,
+                child: Text(
+                  DictionaryManager
+                      .instance.dictionaryMonobankScreen.title,
+                  style: TextStyle(
+                    fontSize: AppTextStyle.font18,
+                    fontWeight: FontWeight.w500,
+                    color: AppTextStyle.colorWhite,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
-              BackArrow(),
-            ],
-          ),
+            ),
+            BackArrow(),
+          ],
         ),
       ),
     );

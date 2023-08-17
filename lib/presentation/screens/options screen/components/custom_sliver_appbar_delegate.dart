@@ -6,15 +6,14 @@ import 'package:practice_app/presentation/screens/options%20screen/components/bl
 import 'package:practice_app/presentation/screens/options%20screen/components/qr_search_menu_buttons.dart';
 import 'package:practice_app/resources/app_sizes.dart';
 
-
 class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   const CustomSliverAppBarDelegate() : super();
 
   @override
-  double get maxExtent => AppSizes.h180;
+  double get maxExtent => AppSizes.h150;
 
   @override
-  double get minExtent => AppSizes.h95;
+  double get minExtent => AppSizes.h60;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
@@ -32,20 +31,25 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
-            BoxShadow(color: Color.fromARGB(95, 76, 76, 76), blurRadius: 3.0),
+            BoxShadow(
+              color: Color.fromARGB(95, 76, 76, 76),
+              blurRadius: 3.0,
+            ),
           ],
           color: Color.fromRGBO(87, 164, 219, 1.0),
         ),
-        child: SafeArea(
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              BlueBoxAnimatedContent(percent: expendPercentage, size: minExtent + (maxExtent - minExtent) * expendPercentage,),
-              QrSearchMenuButtons(expendPercentage),
-              BackArrow(),
-              AddPhoto(expendPercentage),
-            ],
-          ),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            BlueBoxAnimatedContent(
+              percent: expendPercentage,
+              size:
+                  minExtent + (maxExtent - minExtent) * expendPercentage,
+            ),
+            QrSearchMenuButtons(expendPercentage),
+            BackArrow(),
+            AddPhoto(expendPercentage),
+          ],
         ),
       ),
     );

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:practice_app/config/injection_config.dart';
 import 'package:practice_app/presentation/layouts/buttons_screen_layout.dart';
-import 'package:practice_app/notifications_service/notofication_service.dart';
+import 'package:practice_app/services/notifications_service/notofication_service.dart';
 import 'package:practice_app/presentation/layouts/main_layout.dart';
 import 'package:practice_app/presentation/screens/home_screen/components/my_rating_bar.dart';
 import 'package:practice_app/resources/app_sizes.dart';
@@ -32,6 +32,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               Text(
                 DictionaryManager.instance.dictionaryHomeScreen.content,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: AppTextStyle.font30,
                   fontWeight: FontWeight.bold,

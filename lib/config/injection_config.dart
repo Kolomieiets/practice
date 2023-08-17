@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:practice_app/config/injection_config.config.dart';
-import 'package:practice_app/notifications_service/notofication_service.dart';
+import 'package:practice_app/services/notifications_service/notofication_service.dart';
 import 'package:practice_app/services/dictionary/dictionary_manager.dart';
 
 final getIt = GetIt.I;
