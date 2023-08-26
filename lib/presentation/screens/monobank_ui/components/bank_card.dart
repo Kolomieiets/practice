@@ -17,13 +17,13 @@ class BankCard extends StatelessWidget {
             height: AppSizes.h16,
             width: AppSizes.w40,
             decoration: BoxDecoration(
-                color: Color.fromRGBO(252, 84, 81, 1.0),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(AppSizes.w10),
-                )),
+              color: Color.fromRGBO(252, 84, 81, 1.0),
+              borderRadius: BorderRadius.all(
+                Radius.circular(AppSizes.w10),
+              ),
+            ),
             child: Text(
-              DictionaryManager
-                        .instance.dictionaryMonobankScreen.mono,
+              DictionaryManager.instance.dictionaryMonobankScreen.mono,
               style: TextStyle(
                 fontSize: AppTextStyle.font10,
                 color: AppTextStyle.colorMono,
@@ -32,7 +32,8 @@ class BankCard extends StatelessWidget {
           )
         : Text(
             _encodeCard(ind),
-            style: TextStyle(color: AppTextStyle.colorGrey, fontSize: AppTextStyle.font10),
+            style: TextStyle(
+                color: AppTextStyle.colorGrey, fontSize: AppTextStyle.font10),
           );
   }
 

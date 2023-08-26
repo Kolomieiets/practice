@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:practice_app/presentation/layouts/main_layout.dart';
+import 'package:practice_app/presentation/screens/monobank_ui/components/status_persistent_header.dart';
 import 'package:practice_app/services/global/entity/monobank_user.dart';
 import 'package:practice_app/presentation/screens/monobank_ui/components/my_animated_appbar.dart';
 import 'package:practice_app/presentation/screens/monobank_ui/components/persistent_header.dart';
@@ -31,35 +32,33 @@ class _UiMonobankListScreenState extends State<UiMonobankListScreen> {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-        child: Container(
-          color: Colors.black87,
-          child: SafeArea(
-            bottom: false,
-            child: CustomScrollView(
-              physics: ClampingScrollPhysics(),
-              slivers: [
-                const SliverPersistentHeader(
-                  pinned: true,
-                  delegate: MyAnimatedAppBar(),
-                ),
-                SliverPersistentHeader(
-                  pinned: true,
-                  delegate: PersistentHeader(),
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      String id = users[index].id;
-                      _checkFirst(index);
-                      _setColor(index);
-                      return UserItemBuilder(id, index, users, _isFirst);
-                    },
-                    childCount: UsersList.users.length
-                  ),
-                ),
-              ],
+        child: CustomScrollView(
+          physics: ClampingScrollPhysics(),
+          slivers: [
+            SliverPersistentHeader(
+                pinned: true,
+                delegate: StatusPersistentHeader(),
+              ),
+            const SliverPersistentHeader(
+              pinned: true,
+              delegate: MyAnimatedAppBar(),
             ),
-          ),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: PersistentHeader(),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  String id = users[index].id;
+                  _checkFirst(index);
+                  _setColor(index);
+                  return UserItemBuilder(id, index, users, _isFirst);
+                },
+                childCount: UsersList.users.length
+              ),
+            ),
+          ],
         ),
     );
   }
