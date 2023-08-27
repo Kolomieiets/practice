@@ -17,7 +17,5 @@ class Api {
   Future<Response<dynamic>> dogPhotoRequest() async {
     
     return await _dio.get(AppUrls.dogPhoto);
-    
-    
   }
 }

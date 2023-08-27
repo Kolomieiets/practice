@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:practice_app/boundary/requests/facts/factRepository.dart';
+import 'package:practice_app/services/boundary/factRepository.dart';
 import 'package:practice_app/presentation/dialogs/dialog_manager.dart';
 import 'package:practice_app/presentation/layouts/dialog_layout.dart';
 import 'package:practice_app/resources/app_sizes.dart';

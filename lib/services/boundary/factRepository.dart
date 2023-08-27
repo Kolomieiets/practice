@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:practice_app/boundary/requests/facts/api.dart';
+import 'package:practice_app/services/boundary/api.dart';
 
 class FactRepository {
   late final Api api;
