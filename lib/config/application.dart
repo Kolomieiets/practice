@@ -5,11 +5,6 @@ import 'package:practice_app/config/auto_router.dart';
 import 'package:practice_app/resources/style/app_theme.dart';
 import 'package:practice_app/services/global/state_manager/bloc/user_info_bloc/user_info_bloc.dart';
 
-// TODO(Valentyna): url launcher unavailable to send email and make call
-// TODO(Valentyna): wrong location google map
-// TODO(Valentyna): battery level unavailable
-// TODO(Valentyna): sensors plus
-// TODO(Valentyna): video
 class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
